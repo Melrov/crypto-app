@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -22,4 +22,6 @@ function App() {
   );
 }
 
+// https://docs.coincap.io/
+// api.coincap.io/v2/assets?search=doge
 export default App;
