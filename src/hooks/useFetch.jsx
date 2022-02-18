@@ -28,7 +28,7 @@ export default function useFetch(func, keywords, symbol) {
                 const res = await axios({baseURL: 'https://www.alphavantage.co/query', params: {
                     function: func,
                     symbol: symbol,
-                    keywords: "aa br",
+                    keywords: keywords,
                     apikey: apikey
                 }})
                 console.log(res)
@@ -60,7 +60,7 @@ export default function useFetch(func, keywords, symbol) {
 
     return { data, error, loading }
 }
-//api.coincap.io/v2/assets?search=doge
+// api.coincap.io/v2/assets?search=doge
 
-//https://www.alphavantage.co/documentation/
-//02W8J9WJSPINAXYO
+// https://www.alphavantage.co/documentation/
+// 02W8J9WJSPINAXYO

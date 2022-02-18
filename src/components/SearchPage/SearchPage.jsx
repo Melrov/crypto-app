@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
+import StockChart from '../StockDisplay/StockChart'
 import SearchStockDisplay from './SearchStockDisplay'
 
 function SearchPage() {
@@ -18,6 +19,7 @@ function SearchPage() {
       {data && !error && data.map(stock => {
         return <SearchStockDisplay key={stock["1. symbol"]} stock={stock} />
       })}
+      <StockChart />
     </div>
   )
 }
