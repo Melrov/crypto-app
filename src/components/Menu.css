@@ -6,7 +6,7 @@
 .link:hover{
     color: pink
 }
-.active{
+.active:nth-child(even){
     border-bottom: 2px solid white;
 }
 .active:hover{

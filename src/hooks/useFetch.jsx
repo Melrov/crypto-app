@@ -2,10 +2,11 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const baseUrl = 'https://www.alphavantage.co/query?'
-const apikey = "02W8J9WJSPINAXYO"
-let times = 5
+//const apikey = "02W8J9WJSPINAXYO"
+const apikey = '9192a25c33cf0d066ddf9199bab8875e'
+let times = 3
 
-export default function useFetch(func, keywords, symbol) {
+export default function useFetch(func, query, symbol, exchange) {
     //console.log('useFetch')
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
@@ -20,15 +21,10 @@ export default function useFetch(func, keywords, symbol) {
             setError(null)
             setLoading(true)
             try {
-                let url = baseUrl + "function=" + func
-                url += keywords ? '&keywords=' + keywords : ""
-                url += symbol ? '&symbol=' + symbol : ""
-                url += "&apikey=" + apikey
-                //console.log(url)
-                const res = await axios({baseURL: 'https://www.alphavantage.co/query', params: {
-                    function: func,
+                const res = await axios({baseURL: ('https://financialmodelingprep.com/api/v3/' + func), params: {
+                    query: query,
                     symbol: symbol,
-                    keywords: keywords,
+                    exchange: exchange,
                     apikey: apikey
                 }})
                 console.log(res)
@@ -51,12 +47,16 @@ export default function useFetch(func, keywords, symbol) {
                 setLoading(false)
             }
         }
-        console.log(!!func, !!keywords, times > 0)
-        if (func && (keywords || symbol) && times > 0) {
+        console.log(!!func, (query || symbol), times > 0)
+        if (func && (query || symbol) && times > 0) {
+                if(func === 'profile' || func === 'quote'){
+                    func = func + '/' + symbol
+                    symbol = null
+                }
                 init()
                 times--
         }
-    }, [func, keywords, symbol])
+    }, [func, query, symbol, exchange])
 
     return { data, error, loading }
 }
@@ -64,3 +64,6 @@ export default function useFetch(func, keywords, symbol) {
 
 // https://www.alphavantage.co/documentation/
 // 02W8J9WJSPINAXYO
+
+
+//https://financialmodelingprep.com/api/v3/historical-chart/30min/AAPL?apikey=9192a25c33cf0d066ddf9199bab8875e

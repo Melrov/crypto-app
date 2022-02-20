@@ -15,9 +15,10 @@ const Con = styled.div`
 function SearchStockDisplay({ stock }) {
     const navigate = useNavigate()
     return (
-        <Con onClick={() => navigate("/stock/" + stock["1. symbol"])}>
-            <div>{stock["1. symbol"]}</div>
-            <div>{stock["2. name"]}</div>
+        <Con onClick={() => navigate("/stock/" + stock.symbol)}>
+            <div>{stock.symbol}</div>
+            <div>{stock.name}</div>
+            <div>{stock.exchangeShortName}</div>
         </Con>
     )
 }

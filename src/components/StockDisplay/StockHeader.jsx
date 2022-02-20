@@ -2,10 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const HeaderCon = styled.div`
-  border-top: 7px solid ${props => props.change > 0 ? 'green' : props.change < 0 ? 'red' : 'black'};
+  display: flex;
+  border-top: 7px solid green;
   border-radius: 0px;
-  margin: 10px;
   padding-top: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgb(201 201 201);
 `;
 
 const TextCon = styled.div`
@@ -13,36 +16,58 @@ const TextCon = styled.div`
   flex-direction: column;
 `;
 
-const PriceColor = styled.span`
-  color: ${ props => props.change > 0
+
+const LogoImg = styled.img`
+  height: 84px;
+  margin-right: 14px;
+`
+
+const Ticker = styled.span`
+  font-weight: bold;
+  font-size: 18px;
+`
+const Exchange = styled.span`
+  font-size: 14px;
+  color: gray;
+`
+const Price = styled.span`
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 6px;
+`
+const Percent = styled.span`
+  font-size: 19px;
+  color: ${props => props.change > 0
     ? "green"
     : props.change < 0
-    ? "red"
-    : "black"};
-`;
+      ? "red"
+      : "black"};
+`
+const PriceCon = styled.div`
+  margin-top: 4px;
+`
 
-function StockHeader({ globalData, overData }) {
+function StockHeader({ profileData, quoteData }) {
   return (
-    <HeaderCon change={parseFloat(globalData["09. change"])}>
+    <HeaderCon change={parseFloat(quoteData.change)}>
+      <LogoImg src={profileData.image} />
       <div>
         <TextCon>
-          <span>{`${overData ? overData.Name : "N/A"} (${
-            globalData["01. symbol"]
-          })`}</span>
-          <span>{`
-            ${overData ? overData.Exchange : "N/A"}: Currency in ${
-            overData ? overData.Currency : "N/A"
-          }
-            `}</span>
+          <Ticker>{`${quoteData.name} (${quoteData.symbol
+            })`}</Ticker>
+          <Exchange>{`
+            ${quoteData.exchange}: Currency in ${profileData.currency
+            }
+            `}</Exchange>
         </TextCon>
 
-        <div>
-          <span>{`${parseFloat(globalData["05. price"])} `}</span>
-          <PriceColor change={parseFloat(globalData["09. change"])}>{`
-            ${parseFloat(globalData["09. change"])}
-            (${globalData["10. change percent"]})
-            `}</PriceColor>
-        </div>
+        <PriceCon>
+          <Price>{`${parseFloat(quoteData.price)} `}</Price>
+          <Percent change={parseFloat(quoteData.change)}>{`
+            ${parseFloat(quoteData.change)}
+            (${parseFloat(quoteData.changesPercentage)}%)
+            `}</Percent>
+        </PriceCon>
       </div>
       <div></div>
     </HeaderCon>

@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Table = styled.table`
-    width: 50%
+    width: 50%;
 `
 
 const TD = styled.td`
   border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 47px;
   align-items: center;
   * {
     &:first-child {
@@ -18,57 +18,60 @@ const TD = styled.td`
     &:last-child {
       text-align: right;
       width: 50%;
+      font-weight: bold;
     }
   }
 `;
 
-function RightTable({ globalData, overData }) {
+function RightTable({ profileData, quoteData }) {
   return (
     <Table>
       <tbody>
         <tr>
           <TD>
             <span>Market Cap</span>
-            <span>{overData ? overData["MarketCapitalization"] : "N/A"}</span>
+            <span>{parseFloat(quoteData.marketCap)}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Beta</span>
-            <span>{overData ? overData["Beta"] : "N/A"}</span>
+            <span>{profileData.beta}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>PE Ratio</span>
-            <span>{overData ? overData["PERatio"] : "N/A"}</span>
+            <span>{quoteData.pe}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>EPS</span>
-            <span>{overData ? overData["EPS"] : "N/A"}</span>
+            <span>{quoteData.eps}</span>
           </TD>
         </tr>
         <tr>
           <TD>
-            <span>Forward Dividend & Yield</span>
+            <span>Dividend Rate</span>
             <span>
-              {overData
-                ? `${overData["DividendPerShare"]} (${
-                    overData["DividendYield"] * 100
-                  }%)`
-                : "N/A"}
+              {profileData.lastDiv}
             </span>
           </TD>
         </tr>
         <tr>
           <TD>
-            <span>Ex Dividend Date</span>
+            <span>Sector</span>
             <span>
-              {overData && overData["ExDividendDate"]
-                ? overData["ExDividendDate"]
-                : "N/A"}
+              {profileData.sector}
+            </span>
+          </TD>
+        </tr>
+        <tr>
+          <TD>
+            <span>200 Day Average</span>
+            <span>
+              {parseFloat(quoteData.priceAvg200)}
             </span>
           </TD>
         </tr>

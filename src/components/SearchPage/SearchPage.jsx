@@ -5,21 +5,21 @@ import StockChart from '../StockDisplay/StockChart'
 import SearchStockDisplay from './SearchStockDisplay'
 
 function SearchPage() {
-  const [querry, setQuerry] = useState(null)
+  const [query, setQuery] = useState(null)
   const [search, setSearch] = useState("")
   const { urlSearch } = useParams()
-  const { data, error, loading } = useFetch('SYMBOL_SEARCH', querry, null)
+  const { data, error, loading } = useFetch("search", query, null, null)
   console.log(data, error, loading)
 
   return (
     <div>
       <label htmlFor='search'>Search</label>
       <input value={search} type="text" name='search' onChange={e => setSearch(e.target.value)} />
-      <button onClick={e => { setQuerry(search); setSearch("") }}>Search</button>
+      <button onClick={e => { setQuery(search); setSearch("") }}>Search</button>
       {data && !error && data.map(stock => {
-        return <SearchStockDisplay key={stock["1. symbol"]} stock={stock} />
+        return <SearchStockDisplay key={stock.symbol} stock={stock} />
       })}
-      <StockChart />
+      {/* <StockChart /> */}
     </div>
   )
 }
