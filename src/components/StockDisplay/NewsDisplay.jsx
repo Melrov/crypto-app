@@ -33,10 +33,10 @@ const NewsSource = styled.span`
 `;
 const NewsSummary = styled.p``;
 
-function NewsDisplay({ NewsData }) {
+function NewsDisplay({ newsData }) {
   return (
     <NewsCon>
-      {NewsData.map((item) => {
+      {newsData.map((item) => {
         return (
           <NewsArtical key={item.id} href={item.url}>
             <NewsImg src={item.image} />

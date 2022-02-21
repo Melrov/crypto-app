@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Table = styled.table`
-    width: 50%;
-`
+  width: 50%;
+`;
 
 const TD = styled.td`
   border-bottom: 1px solid black;
@@ -30,49 +30,43 @@ function RightTable({ profileData, quoteData }) {
         <tr>
           <TD>
             <span>Market Cap</span>
-            <span>{parseFloat(quoteData.marketCap)}</span>
+            <span>{ quoteData.marketCap ? parseFloat(quoteData.marketCap) : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Beta</span>
-            <span>{profileData.beta}</span>
+            <span>{ profileData.beta ? parseInt(profileData.beta * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>PE Ratio</span>
-            <span>{quoteData.pe}</span>
+            <span>{ quoteData.pe ? parseInt(quoteData.pe * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>EPS</span>
-            <span>{quoteData.eps}</span>
+            <span>{ quoteData.eps ? parseInt(quoteData.eps * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Dividend Rate</span>
-            <span>
-              {profileData.lastDiv}
-            </span>
+            <span>{ profileData.lastDiv ? parseInt(profileData.lastDiv * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Sector</span>
-            <span>
-              {profileData.sector}
-            </span>
+            <span>{ profileData.sector ? profileData.sector : "N/A"}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>200 Day Average</span>
-            <span>
-              {parseFloat(quoteData.priceAvg200)}
-            </span>
+            <span>{ quoteData.priceAvg200 ? parseInt(quoteData.priceAvg200 * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
       </tbody>

@@ -1,69 +1,70 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const baseUrl = 'https://www.alphavantage.co/query?'
+const baseUrl = "https://www.alphavantage.co/query?";
 //const apikey = "02W8J9WJSPINAXYO"
-const apikey = '9192a25c33cf0d066ddf9199bab8875e'
-let times = 3
+const apikey = "9192a25c33cf0d066ddf9199bab8875e";
+let times = 10;
 
-export default function useFetch(func, query, symbol, exchange) {
-    //console.log('useFetch')
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
+export default function useFetch(func, query, symbol, exchange, limit) {
+  //console.log('useFetch')
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        console.log('useEffect')
+  useEffect(() => {
+    console.log("useEffect");
 
-        async function init() {
-            console.log("api call")
-            setData(null)
-            setError(null)
-            setLoading(true)
-            try {
-                const res = await axios({baseURL: ('https://financialmodelingprep.com/api/v3/' + func), params: {
-                    query: query,
-                    symbol: symbol,
-                    exchange: exchange,
-                    apikey: apikey
-                }})
-                console.log(res)
-                
-                if (res.data["Error Message"]) {
-                    throw res.data['Error Message']
-                }
-                if(res.data.bestMatches){
-                    setData(res.data.bestMatches)
-                }else if(res.data["Global Quote"]){
-                    setData(res.data["Global Quote"])
-                }
-                else{
-                    setData(res.data)
-                }
+    async function init() {
+      console.log("api call");
+      setData(null);
+      setError(null);
+      setLoading(true);
+      try {
+        const res = await axios({
+          baseURL: "https://financialmodelingprep.com/api/v3/" + func,
+          params: {
+            query: query,
+            symbol: symbol,
+            exchange: exchange,
+            limit, limit,
+            apikey: apikey,
+          },
+        });
+        console.log(res);
 
-            } catch (error) {
-                setError(error)
-            } finally {
-                setLoading(false)
-            }
+        if (res.data["Error Message"]) {
+          throw res.data["Error Message"];
         }
-        console.log(!!func, (query || symbol), times > 0)
-        if (func && (query || symbol) && times > 0) {
-                if(func === 'profile' || func === 'quote'){
-                    func = func + '/' + symbol
-                    symbol = null
-                }
-                init()
-                times--
+        if (res.data.bestMatches) {
+          setData(res.data.bestMatches);
+        } else if (res.data["Global Quote"]) {
+          setData(res.data["Global Quote"]);
+        } else {
+          setData(res.data);
         }
-    }, [func, query, symbol, exchange])
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    console.log(!!func, query || symbol, times > 0);
+    if (func && (query || symbol) && times > 0) {
+      if (func === "profile" || func === "quote") {
+        func = func + "/" + symbol;
+        symbol = null;
+      }
+      init();
+      times--;
+    }
+  }, [func, query, symbol, exchange]);
 
-    return { data, error, loading }
+  return { data, error, loading };
 }
 // api.coincap.io/v2/assets?search=doge
 
 // https://www.alphavantage.co/documentation/
 // 02W8J9WJSPINAXYO
-
 
 //https://financialmodelingprep.com/api/v3/historical-chart/30min/AAPL?apikey=9192a25c33cf0d066ddf9199bab8875e

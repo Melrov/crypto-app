@@ -1,15 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import UserProvider from './context/UserContext';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import UserProvider from "./context/UserContext";
+import StockProvider from "./context/StockContext";
+import SearchProvider from "./context/SearchContext";
+import SavedStocks from "./context/SavedStocks";
+import SavedStocksProvider from "./context/SavedStocks";
 
 ReactDOM.render(
-  <UserProvider>
-    <App className='App'/>
-  </UserProvider>,
-  document.getElementById('root')
+  <SavedStocksProvider>
+    <SearchProvider>
+      <StockProvider>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </StockProvider>
+    </SearchProvider>
+  </SavedStocksProvider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

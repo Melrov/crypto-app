@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 const Table = styled.table`
-    width: 50%
-`
+  width: 50%;
+`;
 
 const TD = styled.td`
   border-bottom: 1px solid black;
@@ -30,53 +30,47 @@ function LeftTable({ profileData, quoteData }) {
         <tr>
           <TD>
             <span>Previous Close</span>
-            <span>{parseFloat(quoteData.previousClose)}</span>
+            <span>{ quoteData.previousClose ? parseInt(quoteData.previousClose * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Open</span>
-            <span>{parseFloat(quoteData.open)}</span>
+            <span>{ quoteData.open ? parseInt(quoteData.open * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Day's Range</span>
-            <span>{`${parseFloat(quoteData.dayLow)} - ${parseFloat(
+            <span>{ quoteData.dayLow && quoteData.dayHigh ? `${parseInt(quoteData.dayLow * 100)/100} - ${parseInt(
               quoteData.dayHigh
-            )}`}</span>
+              * 100)/100}` : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>52 Week Range</span>
             <span>
-              {parseFloat(quoteData.yearLow)} - {parseFloat(
-                quoteData.yearHigh
-              )}
+              { quoteData.yearLow && quoteData.yearHigh ? `${parseInt(quoteData.yearLow * 100)/100} - ${parseInt(quoteData.yearHigh * 100)/100}` : 'N/A'}
             </span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Volume</span>
-            <span>{quoteData.volume}</span>
+            <span>{ quoteData.volume ? quoteData.volume : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>Avg. Volume</span>
-            <span>
-              {quoteData.avgVolume}
-            </span>
+            <span>{ quoteData.avgVolume ? quoteData.avgVolume : 'N/A'}</span>
           </TD>
         </tr>
         <tr>
           <TD>
             <span>50 Day Average</span>
-            <span>
-              {parseFloat(quoteData.priceAvg50)}
-            </span>
+            <span>{ quoteData.priceAvg50 ? parseInt(quoteData.priceAvg50 * 100)/100 : 'N/A'}</span>
           </TD>
         </tr>
       </tbody>
