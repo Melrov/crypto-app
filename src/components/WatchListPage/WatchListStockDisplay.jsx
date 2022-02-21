@@ -34,14 +34,13 @@ const ChartCon = styled.div`
 
 function WatchListStockDisplay({ stock }) {
     const navigate = useNavigate()
-    const { watchList } = useContext(StockContext);
   return (
     <StockCon onClick={() => navigate('/stock/' + stock.symbol)}>
       <InfoCon>
         <span>{stock.symbol}</span>
       </InfoCon>
       <ChartCon>
-        <StockChart chartData={watchList[0].historyData}/>
+        <StockChart chartData={stock.historyData}/>
       </ChartCon>
       <InfoCon>
         <Price change={stock.quoteData.changesPercentage}>{`${

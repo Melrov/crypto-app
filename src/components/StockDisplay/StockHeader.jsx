@@ -74,7 +74,7 @@ function StockHeader({ profileData, quoteData, newsData, historyData }) {
       newsData: newsData,
       historyData: historyData
     });
-  }, [activeUser]);
+  }, [activeUser, quoteData]);
 
   return (
     <HeaderCon change={parseFloat(quoteData.change)}>

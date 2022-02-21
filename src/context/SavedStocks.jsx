@@ -41,15 +41,17 @@ function SavedStocksProvider(props) {
     [stocks]
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      setQuoteSymbol(querry);
-    }, 200);
+    useEffect(() => {
+      if(querry && !profileLoading){
+        setQuoteSymbol(querry)
+      }
+    }, [profileLoading])
 
-    setTimeout(() => {
-      setHistorySymbol(querry);
-    }, 500);
-  }, [querry]);
+    useEffect(() => {
+      if(querry && !quoteLoading){
+        setHistorySymbol(querry)
+      }
+    }, [quoteLoading])
 
   useEffect(() => {
     if (

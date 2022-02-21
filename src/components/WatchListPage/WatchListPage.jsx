@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { StockContext } from "../../context/StockContext";
 import StockChart from "../StockDisplay/StockChart";
@@ -30,7 +30,19 @@ const Price = styled.span`
 
 function WatchListPage() {
   const { watchList } = useContext(StockContext);
-  console.log(watchList[0].historyData)
+
+  let watchListChartArr = useMemo(() => {
+    if(watchList.length > 0){
+      let arr = watchList[0].historyData
+      for(let i = 1; i < watchList.length; i++){
+        for(let j = 0; j < watchList[i].historyData.length; j++){
+          arr[j] += watchList[i].historyData[j]
+        }
+      }
+      return arr
+    }
+    return []
+  },[watchList] )
 
   const oneDay = useMemo(() => {
     let total = 0;
@@ -72,7 +84,7 @@ function WatchListPage() {
             </div>
           </SummaryItem>
         </SummaryCon>
-        <StockChart chartData={watchList[0].historyData}/>
+        <StockChart chartData={watchListChartArr}/>
       </ChartCon>
     </Con>
   );

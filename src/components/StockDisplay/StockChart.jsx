@@ -47,8 +47,8 @@ function StockChart({ chartData }) {
       Line: {
         borderWidth: 0,
         borderColor:
-          currentChartData[currentChartData.length - 1].close >
-          currentChartData[0].close
+          currentChartData[0] >
+          currentChartData[currentChartData.length - 1]
             ? "rgb(255, 0 ,0)"
             : "rgb(0, 255, 0)",
       },
@@ -71,13 +71,13 @@ function StockChart({ chartData }) {
       {
         label: "",
         backgroundColor:
-          currentChartData[currentChartData.length - 1].close >
-          currentChartData[0].close
+          currentChartData[0] >
+          currentChartData[currentChartData.length - 1]
             ? "rgb(0, 128, 0)"
             : "rgb(255, 0 ,0)",
         borderColor:
-          currentChartData[currentChartData.length - 1].close >
-          currentChartData[0].close
+          currentChartData[0] >
+          currentChartData[currentChartData.length - 1]
             ? "rgb(0, 128, 0)"
             : "rgb(255, 0 ,0)",
         fill: {
