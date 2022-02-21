@@ -11,6 +11,7 @@ const SearchCon = styled.div`
   position: absolute;
   left: 40%;
   top: 2.5vh;
+  height: 5vh;
 `;
 const DataCon = styled.div`
   color: black;

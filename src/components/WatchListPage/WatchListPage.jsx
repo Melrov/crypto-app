@@ -30,6 +30,7 @@ const Price = styled.span`
 
 function WatchListPage() {
   const { watchList } = useContext(StockContext);
+  console.log(watchList[0].historyData)
 
   const oneDay = useMemo(() => {
     let total = 0;
@@ -53,11 +54,7 @@ function WatchListPage() {
       <StocksCon>
         {watchList.length > 0 &&
           watchList.map((stock) => {
-            return <WatchListStockDisplay stock={stock} />;
-          })}
-        {watchList.length > 0 &&
-          watchList.map((stock) => {
-            return <WatchListStockDisplay stock={stock} />;
+            return <WatchListStockDisplay key={stock.symbol + stock.quoteData.dayLow} stock={stock} />;
           })}
       </StocksCon>
       <ChartCon>
@@ -75,7 +72,7 @@ function WatchListPage() {
             </div>
           </SummaryItem>
         </SummaryCon>
-        <StockChart />
+        <StockChart chartData={watchList[0].historyData}/>
       </ChartCon>
     </Con>
   );

@@ -9,6 +9,7 @@ function SavedStocksProvider(props) {
   const [querry, setQuerry] = useState(null);
   const [symbol, setSymbol] = useState(null);
   const [quoteSymbol, setQuoteSymbol] = useState(null);
+  const [historySymbol, setHistorySymbol] = useState(null);
   const {
     data: profileData,
     error: profileError,
@@ -20,13 +21,18 @@ function SavedStocksProvider(props) {
     error: quoteError,
     loading: quoteLoading,
   } = useFetch("quote", null, quoteSymbol, null);
+  const {
+    data: historyData,
+    error: historyError,
+    loading: historyLoading,
+  } = useFetch("historical-chart/5min/" + symbol, null, historySymbol, null);
 
   const getStock = useCallback(
     (symbol) => {
       for (let i = 0; i < stocks.length; i++) {
         if (stocks[i].symbol === symbol) {
-            setCurrentStock(stocks[i])
-          return
+          setCurrentStock(stocks[i]);
+          return;
         }
       }
       setSymbol(symbol);
@@ -39,12 +45,17 @@ function SavedStocksProvider(props) {
     setTimeout(() => {
       setQuoteSymbol(querry);
     }, 200);
+
+    setTimeout(() => {
+      setHistorySymbol(querry);
+    }, 500);
   }, [querry]);
 
   useEffect(() => {
     if (
       profileData &&
       quoteData &&
+      historyData &&
       profileData[0].symbol === symbol &&
       !profileError &&
       quoteData[0].symbol === symbol &&
@@ -56,15 +67,17 @@ function SavedStocksProvider(props) {
           symbol: profileData[0].symbol,
           profileData: profileData[0],
           quoteData: quoteData[0],
+          historyData: historyData.map(stock => stock.close),
         },
       ]);
       setCurrentStock({
         symbol: profileData[0].symbol,
         profileData: profileData[0],
         quoteData: quoteData[0],
+        historyData: historyData.map(stock => stock.close),
       });
     }
-  }, [profileData, quoteData]);
+  }, [profileData, quoteData, historyData]);
 
   return (
     <SavedStocksContext.Provider value={{ currentStock, getStock }}>

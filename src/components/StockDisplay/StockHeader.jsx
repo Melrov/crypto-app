@@ -62,7 +62,7 @@ const WatchListBtn = styled.button`
   }
 `;
 
-function StockHeader({ profileData, quoteData, newsData }) {
+function StockHeader({ profileData, quoteData, newsData, historyData }) {
   const { watchList, toggleWatchList, isWatched } = useContext(StockContext);
   const { activeUser } = useContext(UserContext);
 
@@ -72,6 +72,7 @@ function StockHeader({ profileData, quoteData, newsData }) {
       quoteData: quoteData,
       profileData: profileData,
       newsData: newsData,
+      historyData: historyData
     });
   }, [activeUser]);
 
@@ -104,7 +105,6 @@ function StockHeader({ profileData, quoteData, newsData }) {
             : "Add to WatchList"}
         </WatchListBtn>
       )}
-      <button onClick={() => console.log(watchList)}>show</button>
       <div></div>
     </HeaderCon>
   );

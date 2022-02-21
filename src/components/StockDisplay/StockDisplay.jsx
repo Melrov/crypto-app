@@ -130,9 +130,10 @@ function StockDisplay() {
             profileData={currentStock.profileData}
             quoteData={currentStock.quoteData}
             newsData={newsData}
+            historyData={currentStock.historyData}
           />
 
-          <StockChart />
+          <StockChart chartData={currentStock.historyData}/>
           <TopCon>
             <StockTable profileData={currentStock.profileData} quoteData={currentStock.quoteData} />
             <MiddleLine />

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { StockContext } from "../../context/StockContext";
 import StockChart from "../StockDisplay/StockChart";
 
 const StockCon = styled.div`
@@ -33,13 +34,14 @@ const ChartCon = styled.div`
 
 function WatchListStockDisplay({ stock }) {
     const navigate = useNavigate()
+    const { watchList } = useContext(StockContext);
   return (
     <StockCon onClick={() => navigate('/stock/' + stock.symbol)}>
       <InfoCon>
         <span>{stock.symbol}</span>
       </InfoCon>
       <ChartCon>
-        <StockChart />
+        <StockChart chartData={watchList[0].historyData}/>
       </ChartCon>
       <InfoCon>
         <Price change={stock.quoteData.changesPercentage}>{`${
