@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 
 const baseUrl = "https://www.alphavantage.co/query?";
 //const apikey = "02W8J9WJSPINAXYO"
-const apikey = "9192a25c33cf0d066ddf9199bab8875e";
+//ranout of calls
+//const apikey = "9192a25c33cf0d066ddf9199bab8875e";
+const apikey = "edbef1b782b1e49a33bcc1d8d8c0a22a";
 let times = 10;
 
 export default function useFetch(func, query, symbol, exchange, limit) {
